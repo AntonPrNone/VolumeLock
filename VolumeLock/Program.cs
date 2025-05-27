@@ -18,16 +18,22 @@ namespace VolumeLock
 
             trayIcon = new NotifyIcon
             {
-                Icon = new Icon("Resources/VolumeUnlock.ico"),
+                Icon = new Icon("Resources/VolumeLock.ico"),
                 Visible = true,
-                Text = "Громкость разблокирована",
+                Text = "Громкость заблокирована",
                 ContextMenuStrip = CreateContextMenu()
             };
 
             trayIcon.Click += (sender, e) => ToggleVolumeLock();
 
+            // Блокировка при запуске
+            isVolumeLocked = true;
+            LockVolume();
+            UpdateTrayIcon();
+
             Application.Run();
         }
+
 
         private static ContextMenuStrip CreateContextMenu()
         {
